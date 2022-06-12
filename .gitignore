@@ -1,0 +1,29 @@
+# Dependency directories
+node_modules/
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+
+client/coverage
+
+# Cypress #
+######################
+cypress/screenshots
+cypress/videos
+cypress.env.json
