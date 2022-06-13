@@ -4,7 +4,7 @@ import './ColorGridSwatch.css';
 export default function ColorGridSwatch(props) {
     let color = props.color;
     console.log(`ColorGridSwatch color is ${JSON.stringify(props)}`);
-    let hex_code_string = '#' + color.hex_code;
+    let hex_code_string = ('#' + color.hex_code).toLowerCase();
     return (
         <div className="ColorGridSwatch-container">
             <div className="color-square" style={{ backgroundColor: hex_code_string}}></div>
