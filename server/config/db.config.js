@@ -1,5 +1,5 @@
 module.exports = {
-    HOST: "localhost",
+    HOST: "127.0.0.1",
     USER: "cooperveysey",
     PASSWORD: undefined,
     DB: "helpful_human_interview_challenge_database",

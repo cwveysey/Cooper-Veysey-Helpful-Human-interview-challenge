@@ -2,7 +2,6 @@ import * as React from 'react';
 import './NavigationBar.css';
 import { useNavigate } from "react-router-dom";
 import Helpful_Human_logo from './assets/Helpful_Human_logo.svg';
-import { Routes, Route } from "react-router-dom";
 
 function NavigationBar(props) {
     let navigate = useNavigate();
@@ -10,8 +9,8 @@ function NavigationBar(props) {
 
     return (
         <div className='NavigationBar'>
-        <button className="Helpful_Human_logo_button" onClick={() => navigate(`/`)}>
-            <img className="Helpful_Human_logo" alt="Helpful Human logo" src={Helpful_Human_logo} decoding="async" data-nimg="fill" />
+        <button className="Helpful-Human-logo-button" onClick={() => navigate(`/`)}>
+                <img className="Helpful-Human-logo" alt="Helpful Human logo" src={Helpful_Human_logo} decoding="async" data-nimg="fill" />
         </button>
         </div>
     )

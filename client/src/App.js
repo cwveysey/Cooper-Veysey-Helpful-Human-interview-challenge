@@ -1,6 +1,7 @@
 import './App.css';
 import NavigationBar from './NavigationBar';
 import Sidebar from './Sidebar';
+import ColorGrid from './ColorGrid';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       </header>
       <div className='Sidebar'>
       <Sidebar></Sidebar>
+      </div>
+      <div className='ColorGrid-container'>
+        <ColorGrid></ColorGrid>
       </div>
     </div>
   );
