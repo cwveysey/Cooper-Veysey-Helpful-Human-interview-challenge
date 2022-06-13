@@ -10,24 +10,3 @@
   grid-auto-rows: minmax(150px, auto);
   grid-gap: 40px 22px;
 }
-
-.ColorGrid-swatch {
-  background: #eaeaea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 261px;
-  width: 220px;
-  
-  /* Flex Fallback */
-  margin-left: 5px;
-  margin-right: 5px;
-  flex: 1 1 200px;
-}
-
-/* Per https://codepen.io/geoffgraham/pen/EbVELV, "if Grid is supported, remove the margin we set for the fallback" */
-@supports (display: grid) {
-  .ColorGrid-swatch {
-    margin: 0;
-  }
-}
