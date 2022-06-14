@@ -21,8 +21,8 @@ function App() {
         return response.json();
       })
       .then((actualData) => {
-        console.log(`actualData is ${actualData}`);
-        setColors(actualData);
+        console.log(`actualData is ${JSON.stringify(actualData)}`);
+        setColors(actualData.colors);
         setError(null);
       })
       .catch((err) => {
