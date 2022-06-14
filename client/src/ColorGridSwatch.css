@@ -2,8 +2,8 @@
   background: #FDFDFD;
   display: flex;
   flex-wrap: wrap;
-  height: 261px;
-  width: 220px;
+  height: 259px;
+  width: 218px;
   border-color:#FDFDFD;
   border-width: 1px;
   border-radius: 10px;
@@ -30,6 +30,8 @@
   background-color:var(--color-square-color);
   display: flex;
   float:left;
+  border-radius:9px 9px 0px 0px;
+  
 }
 
 .hex-code-container {
@@ -44,8 +46,8 @@
   color:#363C3C;
   background-color:rgba(0, 0, 0, 0.0);
   padding: 0px;
-  margin-left:24.5px;
-  margin-top:5px;
+  margin-left:23px;
+  margin-top:7px;
   display: inline-block;
   float:left;
 }

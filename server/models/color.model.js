@@ -1,9 +1,10 @@
+
+
 module.exports = (sequelize, Sequelize) => {
     const Color = sequelize.define("color", {
         id: {
-            type: Sequelize.DataTypes.UUID,
-            defaultValue: Sequelize.UUIDV4,
-            allowNull: false,
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.fn('uuid_generate_v4'),
             primaryKey: true
         }, 
         html_name: {

@@ -4,7 +4,7 @@ html, body, #root, .App {
 
 .Sidebar {
   height: calc(100% - 100px);
-  width: 320px;
+  width: 318px;
   background-color: #D6D8D8;
   display: flex;
   float:left;
@@ -17,7 +17,8 @@ html, body, #root, .App {
 .ColorGrid-container {
   height: calc(100% - 100px);
   width: calc(100% - 362px);
-  margin-left: 360px;
+  margin-left: 359.5px;
+  margin-top: 80px;
   float: right;
   background-color: #FFFFFF;
   position: absolute;
