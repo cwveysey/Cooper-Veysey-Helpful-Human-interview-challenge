@@ -1,6 +1,24 @@
 const db = require("../models");
 const Color = db.colors;
 const Op = db.Sequelize.Op;
+
+// Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
+const getPagination = (page, size) => {
+    const limit = size ? +size : 12;
+    const offset = page ? page * limit : 0;
+
+    return { limit, offset };
+};
+
+// Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
+const getPagingData = (data, page, limit) => {
+    const { count: totalItems, rows: colors } = data;
+    const currentPage = page ? +page : 0;
+    const totalPages = Math.ceil(totalItems / limit);
+
+    return { totalItems, colors, totalPages, currentPage };
+};
+
 // Create and Save a new Color
 exports.create = (req, res) => {
     // Validate request
@@ -41,20 +59,25 @@ exports.create = (req, res) => {
             });
         });
 };
-// Retrieve all Colors from the database.
-exports.findAll = (req, res) => {
 
-    Color.findAll()
+// Retrieve all Colors from the database. Configured per // Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
+exports.findAll = (req, res) => {
+    const { page, size, group } = req.query;
+    var condition = group ? { group: { [Op.like]: `%${group}%` } } : null;
+    const { limit, offset } = getPagination(page, size);
+    Color.findAndCountAll({ where: condition, limit, offset }) 
         .then(data => {
-            res.send(data);
+            const response = getPagingData(data, page, limit);
+            res.send(response);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Colors."
+                    err.message || "Some error occurred while retrieving colors."
             });
         });
 };
+
 // Find a single Color with an id
 exports.findOne = (req, res) => {
     const id = req.params.id;
