@@ -3,7 +3,7 @@ import './ColorGrid.css';
 import ColorGridSwatch from './ColorGridSwatch';
 
 export default function ColorGrid(props) {
-    let colors = props.colors;
+    let colors = props.colors.colors;
     return (
         <div className="ColorGrid-grid">
             {colors.map((color) => {
