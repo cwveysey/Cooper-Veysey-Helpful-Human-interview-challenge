@@ -1,13 +1,15 @@
+
 html, body, #root, .App {
   height: 100%;
 }
 
 .Sidebar {
-  height: calc(100% - 100px);
+  position:fixed;
+  height:calc(100% - 100px);
+  top: 100px;
+  left: 0;
   width: 318px;
   background-color: #D6D8D8;
-  display: flex;
-  float:left;
   border-color:#ADADAD;
   border-width: 1px;
   border-style: solid;
@@ -17,11 +19,9 @@ html, body, #root, .App {
 .ColorGrid-container {
   height: calc(100% - 100px);
   width: calc(100% - 362px);
-  margin-left: 359.5px;
-  margin-top: 80px;
+  margin-top: 180px; /* height of nav bar + 80, sketch margin top value. */
   float: right;
   background-color: #FFFFFF;
-  position: absolute;
 }
 
 .PaginationList-container {
@@ -30,8 +30,7 @@ html, body, #root, .App {
   margin-left: auto;
   margin-right: auto;
   margin-top: 80px;
-  margin-bottom: 60px;
-  float: right;
+  padding-bottom: 60px;
   background-color: #FFFFFF;
   display: block;
 }

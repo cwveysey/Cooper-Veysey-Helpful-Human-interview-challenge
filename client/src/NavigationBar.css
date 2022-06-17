@@ -1,4 +1,5 @@
 .Helpful-Human-logo {
+  position:fixed;
   height: 53px; 
   width: 53px; 
   background: transparent;
@@ -6,6 +7,7 @@
 }
 
 .Helpful-Human-logo-button {
+  position:fixed;
   height: 53px; 
   width: 53px; 
   background: transparent;
@@ -21,6 +23,7 @@
 }
 
 .NavigationBar {
+  position:fixed;
   height: 100px;
   width: 100vw;
   background-color: #363C3C;
