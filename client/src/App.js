@@ -13,7 +13,6 @@ function App() {
   const [databasePageNumber, setDatabasePageNumber] = useState(0);
   const [selectedColorGroup, setSelectedColorGroup] = useState(null);    
   const handlePageSelection = (pageSelected) => {
-    console.log(`pageSelected is ${pageSelected}`);
     setDatabasePageNumber(((pageSelected - 1)));
   };
 
