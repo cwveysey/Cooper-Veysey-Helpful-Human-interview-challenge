@@ -11,12 +11,25 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 function App() {
   
   const [databasePageNumber, setDatabasePageNumber] = useState(0);
-  const [selectedColorGroup, setSelectedColorGroup] = useState(null);    
+  const [activeColorGroupQueryParameter, setActiveColorGroupQueryParameter] = useState(null);    
   const handlePageSelection = (pageSelected) => {
     setDatabasePageNumber(((pageSelected - 1)));
   };
 
-  const { data: colors, error, isValidating, isLagging, resetLaggy } = useSWR(() => 'http://localhost:8080/api/colors' + `?page=${databasePageNumber}`, fetcher, { use: [laggy] })
+  const handleColorGroupClick = (colorGroup) => {
+    setActiveColorGroupQueryParameter(colorGroup);
+  }; 
+  console.log(`activeColorGroupQueryParameter is ${JSON.stringify(activeColorGroupQueryParameter)}`);
+  { (activeColorGroupQueryParameter != null) ? console.log(`&group=${activeColorGroupQueryParameter}`): console.log("something else")}
+  const { data: colors, error, isValidating, isLagging, resetLaggy } = useSWR(() => {
+    if (activeColorGroupQueryParameter != null) {
+    console.log('http://localhost:8080/api/colors' + `?page=${databasePageNumber}` + `&group=${activeColorGroupQueryParameter}`);
+    return 'http://localhost:8080/api/colors' + `?page=${databasePageNumber}` + `&group=${activeColorGroupQueryParameter}`
+    } else {
+    return `http://localhost:8080/api/colors` + `?page=${databasePageNumber}`
+    }
+    }, 
+    fetcher, { use: [laggy] })
 
   console.log(`colors is ${JSON.stringify(colors)}`);
   return (
@@ -27,7 +40,7 @@ function App() {
         </nav>
       </header>
       <div className='Sidebar'>
-      <Sidebar></Sidebar>
+        <Sidebar onColorGroupClick={handleColorGroupClick}></Sidebar>
       </div>
       {isValidating && colors == undefined && <div>A moment please...</div>}
       {error && (

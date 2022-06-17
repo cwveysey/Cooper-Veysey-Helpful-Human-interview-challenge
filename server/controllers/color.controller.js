@@ -60,10 +60,10 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Colors from the database. Configured per // Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
+// Retrieve all Colors from the database. Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
 exports.findAll = (req, res) => {
     const { page, size, group } = req.query;
-    var condition = group ? { group: { [Op.like]: `%${group}%` } } : null;
+    var condition = group ? { group: { [Op.iLike]: `%${group}%` } } : null;
     const { limit, offset } = getPagination(page, size);
     Color.findAndCountAll({ where: condition, limit, offset }) 
         .then(data => {

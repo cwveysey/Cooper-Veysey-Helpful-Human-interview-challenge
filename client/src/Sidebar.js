@@ -16,13 +16,17 @@ const colorGroups = [
 
 function Sidebar(props) {
     let navigate = useNavigate();
+
+    const handleClick = (color_name) => {
+        props.onColorGroupClick(color_name);
+    };
     
     return (
         <div>
-            <button className="Random_color_button" onClick={() => navigate(`/`)}>Random Color</button>
+            <button className="Random_color_button" onClick={() => handleClick(colorGroups[colorGroups.length * Math.random() | 0].name)}>Random Color</button>
             <ol className="Color_group_ordered_list">
                 {colorGroups.map((colorGroup) => {
-                    return <li className="Color_group_list_item" key={colorGroup.name}>{colorGroup.name}</li>
+                    return <li className="Color_group_list_item" key={colorGroup.name} onClick={() => handleClick(colorGroup.name)}>{colorGroup.name}</li>
                 })}
             </ol>
         </div>
