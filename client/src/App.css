@@ -26,7 +26,8 @@ html, body, #root, .App {
 
 .PaginationList-container {
   height: 30px;
-  width: 350px;
+  min-width: 218px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 80px;
