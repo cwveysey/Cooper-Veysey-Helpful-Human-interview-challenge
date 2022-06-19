@@ -1,6 +1,7 @@
 const db = require("../models");
 const Color = db.colors;
 const Op = db.Sequelize.Op;
+const { stringify } = require('flatted');
 
 // Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
 const getPagination = (page, size) => {
@@ -62,10 +63,15 @@ exports.create = (req, res) => {
 
 // Retrieve all Colors from the database. Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
 exports.findAll = (req, res) => {
+    console.log(`$findAll req is ${stringify(req)}`);
     const { page, size, group } = req.query;
     var condition = group ? { group: { [Op.iLike]: `%${group}%` } } : null;
     const { limit, offset } = getPagination(page, size);
-    Color.findAndCountAll({ where: condition, limit, offset }) 
+    Color.findAndCountAll({ 
+        where: condition, 
+        limit, 
+        offset 
+    }) 
         .then(data => {
             const response = getPagingData(data, page, limit);
             res.send(response);
@@ -78,12 +84,15 @@ exports.findAll = (req, res) => {
         });
 };
 
+
 // Find a single Color with an id
-exports.findOne = (req, res) => {
+exports.findByPk = (req, res) => {
     const id = req.params.id;
+    console.log(`$findOne req is ${stringify(req)}`);
     Color.findByPk(id)
         .then(data => {
             if (data) {
+                console.log(`${data} is being sent`);
                 res.send(data);
             } else {
                 res.status(404).send({
@@ -97,6 +106,7 @@ exports.findOne = (req, res) => {
             });
         });
 };
+
 // Update a Color by the id in the request
 exports.update = (req, res) => {
     const id = req.params.id;
@@ -156,21 +166,6 @@ exports.deleteAll = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while removing all colors."
-            });
-        });
-};
-// Find all published Colors
-exports.findAllByGroup = (req, res) => {
-    const group = req.params.group;
-    var condition = group ? { group: { [Op.iLike]: `%${group}%` } } : null;
-    Color.findAll({ where: condition })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving colors."
             });
         });
 };

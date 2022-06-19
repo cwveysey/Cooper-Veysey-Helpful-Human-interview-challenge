@@ -1,11 +1,14 @@
 import './App.css';
 import NavigationBar from './NavigationBar';
 import Sidebar from './Sidebar';
-import ColorGrid from './ColorGrid';
-import PaginationList from './PaginationList';
+import Home from './Home';
+import Flow from './Flow.js';
+import ColorDetailView from './ColorDetailView';
 import { useState, useEffect} from "react";
+import { Routes, Route } from "react-router-dom";
 import useSWR from "swr";
 import {laggy} from "./utils.js";
+import { useNavigate } from "react-router-dom";
 const { stringify } = require('flatted');
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -14,6 +17,7 @@ function App() {
   const [databasePageNumber, setDatabasePageNumber] = useState(0);
   const [activeColorGroupQueryParameter, setActiveColorGroupQueryParameter] = useState(null);
   const [activeDetailViewColor, setActiveDetailViewColor] = useState(null);    
+  let navigate = useNavigate();
   
   const handlePageSelection = (pageSelected) => {
     setDatabasePageNumber(((pageSelected - 1)));
@@ -21,10 +25,12 @@ function App() {
 
   const handleColorGroupClick = (colorGroup) => {
     setActiveColorGroupQueryParameter(colorGroup);
+    
   }; 
 
   const handleColorGridSwatchClick = (color) => {
     setActiveDetailViewColor(color);
+    navigate(`/colors/${color.id}`);
   }; 
 
   const { data: colors, error, isValidating, isLagging, resetLaggy } = useSWR(() => {
@@ -32,7 +38,8 @@ function App() {
   },
     fetcher, { use: [laggy] })
 
-  console.log(`colors is ${JSON.stringify(colors)}`);
+  let homeElement;
+  homeElement = (colors != undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / 12)} page={databasePageNumber + 1} onPageSelection={handlePageSelection} flow={Flow.list_view} /> : null;
   return (
     <div className="App">
       <header>
@@ -47,16 +54,11 @@ function App() {
       {error && (
         <div>{`Error fetching colors data - ${error}`}</div>
       )}
-      <div className='ColorGrid-container'>
-        {colors != undefined &&
-          <ColorGrid colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} ></ColorGrid>
-        }
-        <div className='PaginationList-container'>
-          {colors != undefined && <PaginationList count={Math.ceil(colors.totalItems / 12)} page={databasePageNumber + 1} onPageSelection={handlePageSelection}>
-          </PaginationList>}
-        </div>
-      </div>
-      
+      <Routes> 
+        {colors && <Route path="/" element={homeElement} />}
+        {colors && <Route path="home" element={homeElement} />}
+        {<Route path="/colors/:id" element={<ColorDetailView color={activeDetailViewColor}/>} />}
+      </Routes>      
     </div>
   );
 }

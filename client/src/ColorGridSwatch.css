@@ -2,19 +2,32 @@
   background: #FDFDFD;
   display: flex;
   flex-wrap: wrap;
-  height: 259px;
-  width: 218px;
-  border-color:#FDFDFD;
   border-width: 1px;
   border-radius: 10px;
-  border-width: 1px;
   border-style: solid;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
   
   /* Flex Fallback */
   margin-left: 5px;
   margin-right: 5px;
   flex: 1 1 200px;
+}
+
+.ColorGridSwatch-container-detail-view {
+  height: 690px;
+  width: 1038px;
+  border-color:#363C3C;
+  
+  /* Flex Fallback */
+  margin-left: 5px;
+  margin-right: 5px;
+  flex: 1 1 200px;
+}
+
+.ColorGridSwatch-container-list-view {
+box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+height: 259px;
+width: 218px;
+border-color:#FDFDFD;
 }
 
 /* Per https://codepen.io/geoffgraham/pen/EbVELV, "if Grid is supported, remove the margin we set for the fallback" */
@@ -30,8 +43,19 @@
   background-color:var(--color-square-color);
   display: flex;
   float:left;
-  border-radius:9px 9px 0px 0px;
+}
+
+.color-square-detail-view {
+  height:80%;
+  width:100%;
+  border-radius:10px 10px 0px 0px;
   
+}
+
+.color-square-list-view {
+  height:80%;
+  width:100%;
+  border-radius:9px 9px 0px 0px;
 }
 
 .hex-code-container {
@@ -50,4 +74,28 @@
   margin-top:7px;
   display: inline-block;
   float:left;
+}
+
+.hex-code-container-detail-view {
+  
+  /* Per https://thoughtbot.com/blog/how-to-make-quick-calculations-in-sketch, 
+  "The calculation for the line height is: [font size]*[line-height]" - 
+   consequently, line height here is calculated via dividing the Sketch specified
+   line height (30) by the Sketch specified font size (24) */
+  line-height: calc(60/48); 
+  font-size: 48px;
+  margin-left:40px;
+  margin-top:42px;
+}
+
+.hex-code-container-list-view {
+  
+  /* Per https://thoughtbot.com/blog/how-to-make-quick-calculations-in-sketch, 
+  "The calculation for the line height is: [font size]*[line-height]" - 
+   consequently, line height here is calculated via dividing the Sketch specified
+   line height (30) by the Sketch specified font size (24) */
+  line-height: calc(30/24); 
+  font-size: 24px;
+  margin-left:23px;
+  margin-top:7px;
 }

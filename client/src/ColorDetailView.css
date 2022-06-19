@@ -1,0 +1,8 @@
+.ColorDetailView-container {
+  height: calc(100% - 100px);
+  width: calc(100% - 361px);
+  margin-top: 180px; /* height of nav bar + 80, sketch margin top value. */
+  float: left;
+  margin-left: 359.5px;
+  background-color: #FFFFFF;
+}

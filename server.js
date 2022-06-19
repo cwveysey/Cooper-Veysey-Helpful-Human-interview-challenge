@@ -2,9 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
+const logger = require('morgan');
 
 app.use(cors());
 app.options('*', cors());
+
+// Log requests to the console.
+app.use(logger('dev'));
 
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded

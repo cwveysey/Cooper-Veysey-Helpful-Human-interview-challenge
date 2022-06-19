@@ -5,10 +5,8 @@ module.exports = app => {
     router.post("/", colors.create);
     // Retrieve all Colors
     router.get("/", colors.findAll);
-    // Retrieve all published Colors
-    router.get("/:group", colors.findAllByGroup);
     // Retrieve a single Color with id
-    router.get("/:id", colors.findOne);
+    router.get("/:id", colors.findByPk);
     // Update a Color with id
     router.put("/:id", colors.update);
     // Delete a Color with id

@@ -12,7 +12,7 @@ export default function ColorGrid(props) {
         <div className="ColorGrid-grid">
             {colors.map((color) => {
                 return <ColorGridSwatch color={color} key={color.id} onColorGridSwatchClick={handleColorGridSwatchClick
-}></ColorGridSwatch> 
+} flow={props.flow}></ColorGridSwatch> 
             })}
         </div>
     );

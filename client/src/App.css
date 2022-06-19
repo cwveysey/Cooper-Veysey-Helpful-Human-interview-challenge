@@ -20,7 +20,8 @@ html, body, #root, .App {
   height: calc(100% - 100px);
   width: calc(100% - 362px);
   margin-top: 180px; /* height of nav bar + 80, sketch margin top value. */
-  float: right;
+  margin-left: 359.5px;
+  float: left;
   background-color: #FFFFFF;
 }
 
