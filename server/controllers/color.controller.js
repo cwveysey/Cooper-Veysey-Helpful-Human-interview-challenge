@@ -88,11 +88,9 @@ exports.findAll = (req, res) => {
 // Find a single Color with an id
 exports.findByPk = (req, res) => {
     const id = req.params.id;
-    console.log(`$findOne req is ${stringify(req)}`);
     Color.findByPk(id)
         .then(data => {
             if (data) {
-                console.log(`${data} is being sent`);
                 res.send(data);
             } else {
                 res.status(404).send({

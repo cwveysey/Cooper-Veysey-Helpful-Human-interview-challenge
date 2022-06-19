@@ -25,7 +25,7 @@ function App() {
 
   const handleColorGroupClick = (colorGroup) => {
     setActiveColorGroupQueryParameter(colorGroup);
-    
+    navigate(`/`);
   }; 
 
   const handleColorGridSwatchClick = (color) => {
