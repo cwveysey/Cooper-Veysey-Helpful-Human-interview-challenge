@@ -39,7 +39,7 @@ export default function ColorDetailView(props) {
         notification.info({
             message: `Clear button was clicked -`,
             description:
-                'Confirmed that the specified alert has been deleted.',
+                'Confirmed that this is boilerplate copy - thank you for reviewing my application!',
             duration: 5,
             placement,
         });

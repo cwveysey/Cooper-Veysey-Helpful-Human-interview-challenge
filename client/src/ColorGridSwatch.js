@@ -14,7 +14,6 @@ export default function ColorGridSwatch(props) {
     const handleClick = () => {
         props.onColorGridSwatchClick(props.color);
     };
-    console.log(`ColorGridSwatch props are ${JSON.stringify(props)}`);
     // Assign className value based on Flow viewType.
     let color_grid_swatch_container_class_name_string;
     let color_square_class_name_string;

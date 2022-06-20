@@ -14,7 +14,7 @@
 
 .ColorGridSwatch-container-detail-view {
   height: 689px;
-  width: 1038px;
+  width: 92.8671429%;
   border-color:#363C3C;
   
   /* Flex Fallback */
@@ -22,6 +22,12 @@
   margin-right: 5px;
   flex: 1 1 200px;
 }
+
+/* @media screen and (max-width: 1000px){
+  .ColorGridSwatch-container-detail-view {
+    width: 92.8671429%
+  }
+} */
 
 .ColorGridSwatch-container-list-view {
 box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
@@ -42,6 +48,9 @@ border-color:#FDFDFD;
   .ColorGridSwatch-container {
     margin: 0;
   }
+  .ColorGridSwatch-container-detail-view {
+  margin-left: 42px;
+}
 }
 
 .color-square {
@@ -50,6 +59,7 @@ border-color:#FDFDFD;
   background-color:var(--color-square-color);
   display: flex;
   float:left;
+  
 }
 
 .color-square-detail-view {
@@ -62,6 +72,7 @@ border-color:#FDFDFD;
   height:80%;
   width:100%;
   border-radius:9px 9px 0px 0px;
+  cursor: pointer;
 }
 
 .color-square-tints_and_shades_grid_view {
@@ -96,8 +107,8 @@ border-color:#FDFDFD;
    line height (30) by the Sketch specified font size (24) */
   line-height: calc(60/48); 
   font-size: 48px;
-  margin-left:40px;
-  margin-top:42px;
+  margin-left:50px;
+  margin-top:16px;
 }
 
 .hex-code-container-list-view {

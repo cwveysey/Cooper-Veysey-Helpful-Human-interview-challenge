@@ -24,11 +24,13 @@ function App() {
 
   const handleColorGroupClick = (colorGroup) => {
     setActiveColorGroupQueryParameter(colorGroup);
+    setDatabasePageNumber(0);
     navigate(`/`);
   }; 
 
   const handleColorGridSwatchClick = (color) => {
     setActiveDetailViewColor(color);
+    setDatabasePageNumber(0);
     navigate(`/colors/${color.id}`);
   }; 
 

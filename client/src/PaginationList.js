@@ -42,10 +42,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function PaginationList(props) {
   const classes = useStyles();
-  const [selectedPage, setSelectedPage] = useState(props.page);
   const handleChange = (event, page) => {
-    setSelectedPage(page);
     props.onPageSelection(page);
   };
-  return <Pagination classes={{ root: classes.paginationItemRoot }} count={props.count} page={selectedPage} onChange={handleChange} />;
+  return <Pagination classes={{ root: classes.paginationItemRoot }} count={props.count} page={props.page} onChange={handleChange} />;
 }
