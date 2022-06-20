@@ -19,7 +19,7 @@ html, body, #root, .App {
 .ColorGrid-container {
   height: calc(100% - 100px);
   width: calc(100% - 362px);
-  margin-top: 180px; /* height of nav bar + 80, sketch margin top value. */
+  margin-top: 162px; /* height of nav bar + 80 (sketch margin top value) - 19 (~grid-gap vertical value) */
   margin-left: 359.5px;
   float: left;
   background-color: #FFFFFF;

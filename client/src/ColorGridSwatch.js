@@ -3,12 +3,18 @@ import './ColorGridSwatch.css';
 import Flow from './Flow.js';
 
 export default function ColorGridSwatch(props) {
-    let color = props.color;
-    let hex_code_string = ('#' + color.hex_code).toLowerCase();
+    let hex_code_string;
+    if (props.flow.view_type == Flow.tints_grid_view.view_type || props.flow.view_type == Flow.shades_grid_view.view_type) {
+    hex_code_string = props.color; 
+    } else {
+    hex_code_string = props.color.hex_code;
+    }
+    let formatted_hex_code_string = ('#' + hex_code_string).toLowerCase();
+    
     const handleClick = () => {
         props.onColorGridSwatchClick(props.color);
     };
-    
+    console.log(`ColorGridSwatch props are ${JSON.stringify(props)}`);
     // Assign className value based on Flow viewType.
     let color_grid_swatch_container_class_name_string;
     let color_square_class_name_string;
@@ -24,14 +30,21 @@ export default function ColorGridSwatch(props) {
             color_square_class_name_string = "color-square color-square-detail-view"
             hex_code_container_class_name_string = "hex-code-container hex-code-container-detail-view";
             break;
+        case Flow.tints_grid_view.view_type:
+        case Flow.shades_grid_view.view_type:
+            color_grid_swatch_container_class_name_string = "ColorGridSwatch-container ColorGridSwatch-container-tints_and_shades_grid_view"
+            color_square_class_name_string = "color-square color-square-tints_and_shades_grid_view"
+            hex_code_container_class_name_string = "hex-code-container hex-code-container-tints_and_shades_grid_view";
+            console.log(`props.flow.view_type is ${props.flow.view_type}`);
+            break;
     }
 
     return (
         <div className={color_grid_swatch_container_class_name_string} onClick={() => handleClick()}>
-            <div className={color_square_class_name_string} style={{ backgroundColor: hex_code_string}}></div>
+            <div className={color_square_class_name_string} style={{ backgroundColor: formatted_hex_code_string}}></div>
             <div className={hex_code_container_class_name_string}>
-                {hex_code_string}
+                {formatted_hex_code_string}
             </div>
         </div>
     );
-}
+    }
