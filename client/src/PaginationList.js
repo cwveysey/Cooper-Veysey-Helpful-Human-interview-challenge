@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Pagination from '@mui/material/Pagination';
 import { makeStyles } from '@material-ui/core/styles';
-const { stringify } = require('flatted');
 
 const useStyles = makeStyles(theme => ({
   paginationItemRoot: {

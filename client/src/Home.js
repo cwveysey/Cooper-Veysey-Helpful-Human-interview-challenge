@@ -13,11 +13,11 @@ export default function Home(props) {
     }; 
     return (
         <div className='ColorGrid-container'>
-            {props.colors != undefined &&
+            {props.colors !== undefined &&
                 <ColorGrid colors={props.colors} onColorGridSwatchClick={handleColorGridSwatchClick} flow={props.flow}></ColorGrid>
             }
             <div className='PaginationList-container'>
-                {props.colors != undefined && <PaginationList count={props.count} page={props.page} onPageSelection={handlePageSelection}>
+                {props.colors !== undefined && <PaginationList count={props.count} page={props.page} onPageSelection={handlePageSelection}>
                 </PaginationList>}
             </div>
         </div>

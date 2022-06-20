@@ -1,7 +1,5 @@
 import * as React from 'react';
 import './Sidebar.css';
-import { useNavigate } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
 
 const colorGroups = [
     {"name": "Red" }, 
@@ -15,7 +13,6 @@ const colorGroups = [
 ];
 
 function Sidebar(props) {
-    let navigate = useNavigate();
 
     const handleClick = (color_name) => {
         props.onColorGroupClick(color_name);

@@ -4,12 +4,11 @@ import Sidebar from './Sidebar';
 import Home from './Home';
 import Flow from './Flow.js';
 import ColorDetailView from './ColorDetailView';
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import { Routes, Route } from "react-router-dom";
 import useSWR from "swr";
 import {laggy} from "./utils.js";
 import { useNavigate } from "react-router-dom";
-const { stringify } = require('flatted');
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function App() {
@@ -33,24 +32,24 @@ function App() {
     navigate(`/colors/${color.id}`);
   }; 
 
-  const { data: colors, error, isValidating, isLagging, resetLaggy } = useSWR(() => {
+  const { data: colors, error, isValidating} = useSWR(() => {
     return ('http://localhost:8080/api/colors' + `?page=${databasePageNumber}` + (activeColorGroupQueryParameter !== null ? `&group=${activeColorGroupQueryParameter}` : ""))
   },
     fetcher, { use: [laggy] })
 
   let homeElement;
-  homeElement = (colors != undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / 12)} page={databasePageNumber + 1} onPageSelection={handlePageSelection} flow={Flow.list_view} /> : null;
+  homeElement = (colors !== undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / 12)} page={databasePageNumber + 1} onPageSelection={handlePageSelection} flow={Flow.list_view} /> : null;
   return (
     <div className="App">
       <header>
         <nav>
         <NavigationBar></NavigationBar>
         </nav>
-      </header>
+      </header>=
       <div className='Sidebar'>
         <Sidebar onColorGroupClick={handleColorGroupClick}></Sidebar>
       </div>
-      {isValidating && colors == undefined && <div>A moment please...</div>}
+      {isValidating && colors === undefined && <div>A moment please...</div>}
       {error && (
         <div>{`Error fetching colors data - ${error}`}</div>
       )}

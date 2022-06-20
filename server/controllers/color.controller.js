@@ -63,14 +63,16 @@ exports.create = (req, res) => {
 
 // Retrieve all Colors from the database. Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
 exports.findAll = (req, res) => {
-    console.log(`$findAll req is ${stringify(req)}`);
-    const { page, size, group } = req.query;
-    var condition = group ? { group: { [Op.iLike]: `%${group}%` } } : null;
+    const { page, size, group, id, hex_code } = req.query;
+    let where = [];
+    id ? where.push({ id: { [Op.eq]: `${id}` } }) : null;
+    group ? where.push({group: { [Op.iLike]: `%${group}%` }}) : null;
+    hex_code ? where.push({ hex_code: { [Op.iLike]: `%${hex_code}%` } }) : null;
     const { limit, offset } = getPagination(page, size);
-    Color.findAndCountAll({ 
-        where: condition, 
-        limit, 
-        offset 
+    Color.findAndCountAll({
+        where,
+        limit,
+        offset
     }) 
         .then(data => {
             const response = getPagingData(data, page, limit);
@@ -83,7 +85,6 @@ exports.findAll = (req, res) => {
             });
         });
 };
-
 
 // Find a single Color with an id
 exports.findByPk = (req, res) => {
