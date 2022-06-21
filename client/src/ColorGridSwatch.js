@@ -34,7 +34,6 @@ export default function ColorGridSwatch(props) {
             color_grid_swatch_container_class_name_string = "ColorGridSwatch-container ColorGridSwatch-container-tints_and_shades_grid_view"
             color_square_class_name_string = "color-square color-square-tints_and_shades_grid_view"
             hex_code_container_class_name_string = "hex-code-container hex-code-container-tints_and_shades_grid_view";
-            console.log(`props.flow.view_type is ${props.flow.view_type}`);
             break;
     }
 

@@ -19,7 +19,7 @@ export default function ColorDetailView(props) {
         return (`http://localhost:8080/api/colors/${params.id}`)
     }, fetcher, { use: [laggy] })
     let navigate = useNavigate();
-    console.log(`color is ${JSON.stringify(color)}`);
+    
     let shades;
     let tints;
     if(color) {
