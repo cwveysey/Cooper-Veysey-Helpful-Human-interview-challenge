@@ -36,7 +36,7 @@ function App() {
   }; 
 
   const { data: colors, error, isValidating} = useSWR(() => {
-    return (process.env.REACT_APP_APIUrl + `colors` + `?page=${databasePageNumber}` + (activeColorGroupQueryParameter !== null ? `&group=${activeColorGroupQueryParameter}` : ""))
+    return (process.env.REACT_APP_APIUrl + `/colors` + `?page=${databasePageNumber}` + (activeColorGroupQueryParameter !== null ? `&group=${activeColorGroupQueryParameter}` : ""))
   },
     fetcher, { use: [laggy] })
 

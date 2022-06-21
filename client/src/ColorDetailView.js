@@ -16,7 +16,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function ColorDetailView(props) {
     const params = useParams();
     const { data: color, error, isValidating} = useSWR(() => {
-        return (process.env.REACT_APP_APIUrl + `colors/${params.id}`)
+        return (process.env.REACT_APP_APIUrl + `/colors/${params.id}`)
     }, fetcher, { use: [laggy] })
     let navigate = useNavigate();
     
