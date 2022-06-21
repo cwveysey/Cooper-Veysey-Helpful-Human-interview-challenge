@@ -1,7 +1,29 @@
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env]; 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(config.database, config.username, config.password, {
+let sequelize;
+if (process.env.NODE_ENV === 'production') {
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false
+        }
+    }
+}
+);
+
+sequelize
+    .authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err => {
+        console.error('Unable to connect to the database:', err);
+    });
+} else {
+
+    sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: config.dialect,
     operatorsAliases: '0',
@@ -12,6 +34,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
         idle: config.pool.idle
     }
 });
+}
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;

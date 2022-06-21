@@ -20,6 +20,13 @@
     "dialect": "postgres"
   },
   "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
     "username": "cooperveysey",
     "password": null,
     "database": "helpful_human_interview_challenge_database",

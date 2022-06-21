@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import useSWR from "swr";
 import {laggy} from "./utils.js";
 import { useNavigate } from "react-router-dom";
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
   }; 
 
   const { data: colors, error, isValidating} = useSWR(() => {
-    return ('http://localhost:8080/api/colors' + `?page=${databasePageNumber}` + (activeColorGroupQueryParameter !== null ? `&group=${activeColorGroupQueryParameter}` : ""))
+    return (process.env.REACT_APP_APIUrl + `colors` + `?page=${databasePageNumber}` + (activeColorGroupQueryParameter !== null ? `&group=${activeColorGroupQueryParameter}` : ""))
   },
     fetcher, { use: [laggy] })
 

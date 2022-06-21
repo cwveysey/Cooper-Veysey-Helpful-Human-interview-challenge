@@ -8,7 +8,7 @@ import './ColorDetailView.css';
 import useSWR from "swr";
 import { laggy } from "./utils.js";
 import { notification } from 'antd';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css'; // See https://github.com/ant-design/ant-design/issues/33327
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -16,7 +16,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function ColorDetailView(props) {
     const params = useParams();
     const { data: color, error, isValidating} = useSWR(() => {
-        return (`http://localhost:8080/api/colors/${params.id}`)
+        return (process.env.REACT_APP_APIUrl + `colors/${params.id}`)
     }, fetcher, { use: [laggy] })
     let navigate = useNavigate();
     
