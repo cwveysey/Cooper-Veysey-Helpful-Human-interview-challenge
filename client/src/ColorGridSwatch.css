@@ -1,0 +1,136 @@
+.ColorGridSwatch-container {
+  background: #FDFDFD;
+  display: flex;
+  flex-wrap: wrap;
+  border-width: 1px;
+  border-radius: 10px;
+  border-style: solid;
+  
+  /* Flex Fallback */
+  margin-left: 5px;
+  margin-right: 5px;
+  flex: 1 1 200px;
+}
+
+.ColorGridSwatch-container-detail-view {
+  height: 689px;
+  width: 92.8671429%;
+  border-color:#363C3C;
+  
+  /* Flex Fallback */
+  margin-left: 5px;
+  margin-right: 5px;
+  flex: 1 1 200px;
+}
+
+/* @media screen and (max-width: 1000px){
+  .ColorGridSwatch-container-detail-view {
+    width: 92.8671429%
+  }
+} */
+
+.ColorGridSwatch-container-list-view {
+box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+height: 259px;
+width: 218px;
+border-color:#FDFDFD;
+}
+
+.ColorGridSwatch-container-tints_and_shades_grid_view {
+box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+height: 175px;
+width: 175px;
+border-color:#FDFDFD;
+}
+
+/* Per https://codepen.io/geoffgraham/pen/EbVELV, "if Grid is supported, remove the margin we set for the fallback" */
+@supports (display: grid) {
+  .ColorGridSwatch-container {
+    margin: 0;
+  }
+  .ColorGridSwatch-container-detail-view {
+  margin-left: 42px;
+}
+}
+
+.color-square {
+  height:80%;
+  width:100%;
+  background-color:var(--color-square-color);
+  display: flex;
+  float:left;
+  
+}
+
+.color-square-detail-view {
+  height:80%;
+  width:100%;
+  border-radius:10px 10px 0px 0px;
+}
+
+.color-square-list-view {
+  height:80%;
+  width:100%;
+  border-radius:9px 9px 0px 0px;
+  cursor: pointer;
+}
+
+.color-square-tints_and_shades_grid_view {
+  height:62.29%;
+  width:100%;
+  border-radius:9px 9px 0px 0px;
+}
+
+.hex-code-container {
+  font-family: 'Source Serif Pro', serif;
+  /* Per https://thoughtbot.com/blog/how-to-make-quick-calculations-in-sketch, 
+  "The calculation for the line height is: [font size]*[line-height]" - 
+   consequently, line height here is calculated via dividing the Sketch specified
+   line height (30) by the Sketch specified font size (24) */
+  line-height: calc(30/24); 
+  font-size: 24px;
+  font-weight: 400;
+  color:#363C3C;
+  background-color:rgba(0, 0, 0, 0.0);
+  padding: 0px;
+  margin-left:23px;
+  margin-top:7px;
+  display: inline-block;
+  float:left;
+}
+
+.hex-code-container-detail-view {
+  
+  /* Per https://thoughtbot.com/blog/how-to-make-quick-calculations-in-sketch, 
+  "The calculation for the line height is: [font size]*[line-height]" - 
+   consequently, line height here is calculated via dividing the Sketch specified
+   line height (30) by the Sketch specified font size (24) */
+  line-height: calc(60/48); 
+  font-size: 48px;
+  margin-left:50px;
+  margin-top:16px;
+}
+
+.hex-code-container-list-view {
+  
+  /* Per https://thoughtbot.com/blog/how-to-make-quick-calculations-in-sketch, 
+  "The calculation for the line height is: [font size]*[line-height]" - 
+   consequently, line height here is calculated via dividing the Sketch specified
+   line height (30) by the Sketch specified font size (24) */
+  line-height: calc(30/24); 
+  font-size: 24px;
+  margin-left:23px;
+  margin-top:7px;
+}
+
+.hex-code-container-tints_and_shades_grid_view {
+  
+  /* Per https://thoughtbot.com/blog/how-to-make-quick-calculations-in-sketch, 
+  "The calculation for the line height is: [font size]*[line-height]" - 
+   consequently, line height here is calculated via dividing the Sketch specified
+   line height (30) by the Sketch specified font size (24) */
+  line-height: calc(30/24); 
+  font-size: 24px;
+  margin-left:23px;
+  margin-top:7px;
+}

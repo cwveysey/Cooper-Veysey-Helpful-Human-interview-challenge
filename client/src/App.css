@@ -1,0 +1,40 @@
+
+html, body, #root, .App {
+  height: 100%;
+}
+
+.Sidebar {
+  position:fixed;
+  height:calc(100% - 100px);
+  top: 100px;
+  left: 0;
+  width: 318px;
+  background-color: #D6D8D8;
+  border-color:#ADADAD;
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: 2px 0px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ColorGrid-container {
+  height: calc(100% - 100px);
+  width: calc(100% - 362px);
+  margin-top: 162px; /* height of nav bar + 80 (sketch margin top value) - 19 (~grid-gap vertical value) */
+  margin-left: 359.5px;
+  float: left;
+  background-color: #FFFFFF;
+}
+
+.PaginationList-container {
+  height: 30px;
+  min-width: 218px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+  padding-bottom: 60px;
+  background-color: #FFFFFF;
+  display: block;
+}
+
+

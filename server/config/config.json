@@ -1,0 +1,36 @@
+{
+  "development": {
+    "username": "cooperveysey",
+    "password": null,
+    "database": "helpful_human_interview_challenge_database",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "pool": {
+        "max": 5,
+        "min": 0,
+        "acquire": 30000,
+        "idle": 10000
+    }
+  },
+  "test": {
+    "username": "cooperveysey",
+    "password": null,
+    "database": "helpful_human_interview_challenge_database",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "username": "cooperveysey",
+    "password": null,
+    "database": "helpful_human_interview_challenge_database",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
