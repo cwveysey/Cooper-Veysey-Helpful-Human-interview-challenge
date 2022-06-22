@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './ColorGridSwatch.css';
 import Flow from './Flow.js';
+import TestId from './TestId.js';
 
 export default function ColorGridSwatch(props) {
     let hex_code_string;
@@ -14,7 +15,7 @@ export default function ColorGridSwatch(props) {
     const handleClick = () => {
         props.onColorGridSwatchClick(props.color);
     };
-    // Assign className value based on Flow viewType.
+    // Assign className value based on Flow view_type.
     let color_grid_swatch_container_class_name_string;
     let color_square_class_name_string;
     let hex_code_container_class_name_string;

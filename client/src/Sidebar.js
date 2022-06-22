@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './Sidebar.css';
+import TestId from './TestId.js';
 
 const colorGroups = [
     {"name": "Red" }, 

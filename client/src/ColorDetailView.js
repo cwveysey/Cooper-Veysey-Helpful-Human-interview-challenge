@@ -11,6 +11,8 @@ import { notification } from 'antd';
 import 'antd/dist/antd.min.css'; // See https://github.com/ant-design/ant-design/issues/33327
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import TestId from './TestId.js';
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function ColorDetailView(props) {
@@ -26,10 +28,6 @@ export default function ColorDetailView(props) {
         shades = calculateShades(color.hex_code).slice(1, 6); 
         tints = calculateTints(color.hex_code).slice(1, 6); 
     }
-
-    const handleColorGridSwatchClick = (color) => {
-        navigate(`/colors/${color.id}`);
-    }; 
 
     const handleClearButtonClick = () => {
         openNotification('topRight');
@@ -47,15 +45,15 @@ export default function ColorDetailView(props) {
 
     return (
         <div className='ColorDetailView-container'>
-            {color && <ColorGridSwatch color={color} key={color.id} flow={Flow.detail_view}></ColorGridSwatch>}
+            {color && <ColorGridSwatch color={color} key={color.id} flow={Flow.detail_view} data-testid={TestId.ColorGridSwatchTestId}></ColorGridSwatch>}
         <div className='Shades-container'>
             {shades &&
-                <ColorGrid colors={shades} flow={Flow.shades_grid_view} ></ColorGrid>
+                <ColorGrid colors={shades} flow={Flow.shades_grid_view} data-testid={TestId.ColorGridTestId}></ColorGrid>
             }
         </div>
         <div className='Tints-container'>
             {tints &&
-                <ColorGrid colors={tints} flow={Flow.tints_grid_view} ></ColorGrid>
+                <ColorGrid colors={tints} flow={Flow.tints_grid_view} data-testid={TestId.ColorGridTestId}></ColorGrid>
             }
             </div>
             <div className='Clear-button-container'>
