@@ -14,7 +14,7 @@
   grid-template-columns: repeat(auto-fill, minmax(218px, 1fr));
 }
 
-.ColorGrid-grid-tints_and_shades_grid_view {
+.Tints_and_shades_grid_view_ColorGrid {
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
 }
 

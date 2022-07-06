@@ -10,6 +10,14 @@ export default class TestId {
     static SidebarTestId = new TestId('SidebarTestId')
     static Helpful_Human_logo_button_TestId = new TestId('Helpful_Human_logo_button_TestId')
     static Helpful_Human_logo_img_TestId = new TestId('Helpful_Human_logo_img_TestId')
+    static Random_color_button_TestId = new TestId('Random_color_button_TestId')
+    static Color_square_detail_view_TestId = new TestId('Color_square_detail_view_TestId')
+    static Color_square_list_view_TestId = new TestId('Color_square_list_view_TestId')
+    static Tints_and_shades_grid_view_Color_square_TestId = new TestId('Tints_and_shades_grid_view_Color_square_TestId')
+    static List_view_ColorGrid_TestId = new TestId('List_view_ColorGrid_TestId')
+    static Tints_and_shades_grid_view_ColorGridSwatch_container_TestId = new TestId('Tints_and_shades_grid_view_ColorGridSwatch_container_TestId')
+    static List_view_ColorGridSwatch_container_TestId = new TestId('List_view_ColorGridSwatch_container_TestId')
+    static Detail_view_ColorGridSwatch_container_TestId = new TestId('Detail_view_ColorGridSwatch_container_TestId')
     
     constructor(testIDValue) {
         this.testIDValue = testIDValue

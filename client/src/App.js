@@ -35,7 +35,7 @@ function App() {
     setDatabasePageNumber(0);
     navigate(`/colors/${color.id}`);
   }; 
-
+  
   const { data: colors, error, isValidating} = useSWR(() => {
     return (process.env.REACT_APP_APIUrl + `/colors` + `?page=${databasePageNumber}` + (activeColorGroupQueryParameter !== null ? `&group=${activeColorGroupQueryParameter}` : ""))
   },

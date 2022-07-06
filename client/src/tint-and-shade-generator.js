@@ -19,7 +19,7 @@ function intToHex(rgbint) {
 
 // convert one of our rgb color objects to a full hex color string
 // { red: 80, green: 18, blue: 20 } => '501214'
-function rgbToHex(rgb) {
+export function rgbToHex(rgb) {
     return intToHex(rgb.red) + intToHex(rgb.green) + intToHex(rgb.blue);
 }
 
