@@ -15,7 +15,7 @@ export default function ColorGridSwatch(props) {
     const handleClick = () => {
         props.onColorGridSwatchClick(props.color);
     };
-
+    
     
     // Assign className and data-testid values based on Flow value.
     let color_grid_swatch_container_class_name_string;

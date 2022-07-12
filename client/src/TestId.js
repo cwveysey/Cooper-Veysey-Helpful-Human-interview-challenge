@@ -18,6 +18,7 @@ export default class TestId {
     static Tints_and_shades_grid_view_ColorGridSwatch_container_TestId = new TestId('Tints_and_shades_grid_view_ColorGridSwatch_container_TestId')
     static List_view_ColorGridSwatch_container_TestId = new TestId('List_view_ColorGridSwatch_container_TestId')
     static Detail_view_ColorGridSwatch_container_TestId = new TestId('Detail_view_ColorGridSwatch_container_TestId')
+    static Color_group_list_item_TestId = new TestId('Color_group_list_item_TestId')
     
     constructor(testIDValue) {
         this.testIDValue = testIDValue

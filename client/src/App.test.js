@@ -1,9 +1,9 @@
-import { render, screen, fireEvent, waitFor, waitForElementToBeRemoved} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor} from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import App from './App';
 import { rgbToHex } from './tint-and-shade-generator.js';
 import TestId from './TestId.js';
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 const { stringify } = require('flatted');
 
 describe('App.js', () => {
@@ -56,6 +56,42 @@ describe('App.js', () => {
     expect(allEqual(colorGroupArray)).toBe(false); // The probability of the same color group 5 times in a row is (1/8)^5, or .003051757% - so the allEqual result should equal false.
     expect(colorGroupArray.length).toBeGreaterThan(0);
   });
+
+  test('Clicking a Color_group_list_item', async () => {
+
+    let colorGroupArray = [];
+
+    let color_group_list_item;
+    await waitFor(() => {
+      const color_group_list_items = screen.getAllByTestId(TestId.Color_group_list_item_TestId);
+      color_group_list_item = color_group_list_items[color_group_list_items.length * Math.random() | 0];
+      console.log(`color_group_list_item is: ${color_group_list_item}`);
+      fireEvent.click(color_group_list_item);
+    });
+    await act(async () => {
+      /* We want to ensure that the state updates caused by the random_color_button click have finished. 
+      Several internet resources suggest doing this via findByText("Loading"),  
+      findByText("[some new text that would not have previously been visible]"), or confirming if a specific element
+      has been added or removed from the DOM. We unfortunately can't confirm that the UI has finished
+      updating via text changing, because, regarding the intended effect of the random_color_button click, the
+      existing color (e.g. red) might very well match the new randomly selected color. At the time of this writing,
+      there is precisely a 1/8 chance of this happening (at the time of this writing there are 8 different color groups).
+  
+      Via the setTimeout 2000ms value, we're configuring things such that the UI has 2000ms or 2 seconds to update.
+      */
+      await new Promise((r) => setTimeout(r, 2000));
+    });
+
+    let hex_code_string = configureHexCodeString();
+
+    await act(async () => {
+      const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
+      const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
+      colorGroupArray.push(result.colors[0].group);
+    });
+    expect(colorGroupArray.length).toBeGreaterThan(0);
+    expect(ciEquals(colorGroupArray[0],color_group_list_item.textContent)).toBe(true);
+  });
 });
 
 function configureHexCodeString() {
@@ -67,4 +103,12 @@ function configureHexCodeString() {
   let rgbArray = rgbString.split(",");
   let rgbObject = { "red": rgbArray[0], "green": rgbArray[1], "blue": rgbArray[2] }; // { red: 80, green: 18, blue: 20 }
   return rgbToHex(rgbObject); // cd5c5c
+}
+
+/* See https://stackoverflow.com/questions/2140627/how-to-do-case-insensitive-string-comparison by Samuel Neff for context. 
+This function facilitates case insensitive string comparison. */
+function ciEquals(a, b) {
+  return typeof a === 'string' && typeof b === 'string'
+    ? a.localeCompare(b, undefined, { sensitivity: 'accent' }) === 0
+    : a === b;
 }
