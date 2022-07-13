@@ -58,14 +58,13 @@ describe('App.js', () => {
   });
 
   test('Clicking a Color_group_list_item', async () => {
-
-    let colorGroupArray = [];
-
+    let color_group_associated_with_currently_displayed_color_squares;
     let color_group_list_item;
+    
     await waitFor(() => {
       const color_group_list_items = screen.getAllByTestId(TestId.Color_group_list_item_TestId);
       color_group_list_item = color_group_list_items[color_group_list_items.length * Math.random() | 0];
-      console.log(`color_group_list_item is: ${color_group_list_item}`);
+      console.log(`color_group_list_item.textContent is: ${color_group_list_item.textContent}`);
       fireEvent.click(color_group_list_item);
     });
     await act(async () => {
@@ -87,10 +86,9 @@ describe('App.js', () => {
     await act(async () => {
       const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
       const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-      colorGroupArray.push(result.colors[0].group);
+      color_group_associated_with_currently_displayed_color_squares = result.colors[0].group;
     });
-    expect(colorGroupArray.length).toBeGreaterThan(0);
-    expect(ciEquals(colorGroupArray[0],color_group_list_item.textContent)).toBe(true);
+    expect(ciEquals(color_group_associated_with_currently_displayed_color_squares,color_group_list_item.textContent)).toBe(true);
   });
 });
 

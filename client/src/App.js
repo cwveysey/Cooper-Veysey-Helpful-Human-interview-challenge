@@ -41,6 +41,7 @@ function App() {
   },
     fetcher, { use: [laggy] })
 
+  console.log(`isValidating is: ${isValidating}`);
   let homeElement;
   homeElement = (colors !== undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / 12)} page={databasePageNumber + 1} onPageSelection={handlePageSelection} flow={Flow.list_view} data-testid={TestId.HomeTestId} /> : null; // Regarding Math.ceil(colors.totalItems / 12), because the design file features 12 colors per page, we divide the total number of colors that we are retrieving - sometimes our color retrieval is filtered by color group -  by 12 to calculate our desired number of pages. Because page values are integers, we round up to the nearest integer.
   return (
