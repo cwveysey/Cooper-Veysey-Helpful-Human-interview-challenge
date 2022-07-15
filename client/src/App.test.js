@@ -45,11 +45,19 @@ describe('Clicking the Random_color_button', () => {
 
       let hex_code_string = configureHexCodeString();
 
-      await act(async () => {
-        const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-        const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-        colorGroupArray.push(result.colors[0].group);
-      });
+      let color = await retrieveColorUsingHexCodeString(hex_code_string);
+      colorGroupArray.push(color.group);
+    // await act(async () => { // TODO potentially extract to a function - repeat code.
+    //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
+    //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
+    //   color_square_color_id = result.colors[0].id;
+    // });
+
+      // await act(async () => {
+      //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
+      //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
+      //   colorGroupArray.push(result.colors[0].group);
+      // });
     }
     const allEqual = arr => arr.every(v => v === arr[0]);
     expect(allEqual(colorGroupArray)).toBe(false); // The probability of the same color group 5 times in a row is (1/8)^5, or .003051757% - so the allEqual result should equal false.
@@ -95,12 +103,14 @@ describe('Clicking a Color_group_list_item', () => {
     });
 
     let hex_code_string = configureHexCodeString();
+    let color = await retrieveColorUsingHexCodeString(hex_code_string);
+    color_group_associated_with_currently_displayed_color_squares = color.group;
 
-    await act(async () => {
-      const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-      const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-      color_group_associated_with_currently_displayed_color_squares = result.colors[0].group;
-    });
+    // await act(async () => {
+    //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
+    //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
+    //   color_group_associated_with_currently_displayed_color_squares = result.colors[0].group;
+    // });
     expect(ciEquals(color_group_associated_with_currently_displayed_color_squares, color_group_list_item.textContent)).toBe(true);
   });
 });
@@ -122,14 +132,14 @@ describe('Clicking a ColorGridSwatch element when the ColorGrid component\'s Flo
   it('should result in the corresponding ColorDetailView being displayed, and facilitate navigation to the path associated with the ColorGridSwatch that was clicked', async () => {
   
   let hex_code_string = configureHexCodeString(true);
-  let color_square_color_id;
-    await act(async () => { // TODO potentially extract to a function - repeat code.
-      const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-      const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-      color_square_color_id = result.colors[0].id;
-    });
+  let color = await retrieveColorUsingHexCodeString(hex_code_string);
+    // await act(async () => { // TODO potentially extract to a function - repeat code.
+    //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
+    //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
+    //   color_square_color_id = result.colors[0].id;
+    // });
     
-  let detail_view_path = `/colors/${color_square_color_id}`;
+  let detail_view_path = `/colors/${color.id}`;
     expect(global.window.location.pathname).toEqual(`${detail_view_path}`);
   });
 });
@@ -157,4 +167,17 @@ function ciEquals(a, b) {
   return typeof a === 'string' && typeof b === 'string'
     ? a.localeCompare(b, undefined, { sensitivity: 'accent' }) === 0
     : a === b;
+}
+
+async function retrieveColorUsingHexCodeString(hex_code_string) {
+  let color = await act(async () => { 
+    try { 
+    const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
+    const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
+    return result.colors[0];
+    } catch (error) {
+      console.log(`error is ${error}`);
+    }
+  });
+  return color;
 }
