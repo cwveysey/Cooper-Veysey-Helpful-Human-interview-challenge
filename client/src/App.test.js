@@ -6,17 +6,17 @@ import TestId from './TestId.js';
 import { BrowserRouter } from 'react-router-dom';
 const { stringify } = require('flatted');
 
-describe('Clicking the Random_color_button', () => {
-
-  beforeEach(() => {
-    act(() => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
-    });
+beforeEach(() => {
+  act(() => {
+    render(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
   });
+});
+
+describe('Clicking the Random_color_button', () => {
 
   jest.setTimeout(30000); // Per https://jestjs.io/docs/28.0/jest-object, "The default timeout interval is 5 seconds if this method is not called."
 
@@ -67,16 +67,6 @@ describe('Clicking the Random_color_button', () => {
 
 describe('Clicking a Color_group_list_item', () => {
 
-  beforeEach(() => {
-    act(() => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
-    });
-  });
-
   jest.setTimeout(30000); // Per https://jestjs.io/docs/28.0/jest-object, "The default timeout interval is 5 seconds if this method is not called."
 
   it('Should result in color-square-list-view elements being assigned (and subsequently displaying) the color group value associated with the Color_group_list_item that was clicked', async () => {
@@ -116,16 +106,6 @@ describe('Clicking a Color_group_list_item', () => {
 });
 
 describe('Clicking a ColorGridSwatch element when the ColorGrid component\'s Flow view_type is list_view', () => {
-
-  beforeEach(() => {
-    act(() => {
-      render(
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      );
-    });
-  });
 
   jest.setTimeout(30000); // Per https://jestjs.io/docs/28.0/jest-object, "The default timeout interval is 5 seconds if this method is not called."
 
