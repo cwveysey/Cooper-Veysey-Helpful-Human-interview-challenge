@@ -29,35 +29,11 @@ describe('Clicking the Random_color_button', () => {
         const random_color_button = screen.getByTestId(TestId.Random_color_button_TestId);
         fireEvent.click(random_color_button)
       });
-      await act(async () => {
-        /* We want to ensure that the state updates caused by the random_color_button click have finished. 
-        Several internet resources suggest doing this via findByText("Loading"),  
-        findByText("[some new text that would not have previously been visible]"), or confirming if a specific element
-        has been added or removed from the DOM. We unfortunately can't confirm that the UI has finished
-        updating via text changing, because, regarding the intended effect of the random_color_button click, the
-        existing color (e.g. red) might very well match the new randomly selected color. At the time of this writing,
-        there is precisely a 1/8 chance of this happening (at the time of this writing there are 8 different color groups).
-
-        Via the setTimeout 2000ms value, we're configuring things such that the UI has 2000ms or 2 seconds to update.
-        */
-        await new Promise((r) => setTimeout(r, 2000));
-      });
+      await allowTheUITimeToUpdate();
 
       let hex_code_string = configureHexCodeString();
-
       let color = await retrieveColorUsingHexCodeString(hex_code_string);
       colorGroupArray.push(color.group);
-    // await act(async () => { // TODO potentially extract to a function - repeat code.
-    //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-    //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-    //   color_square_color_id = result.colors[0].id;
-    // });
-
-      // await act(async () => {
-      //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-      //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-      //   colorGroupArray.push(result.colors[0].group);
-      // });
     }
     const allEqual = arr => arr.every(v => v === arr[0]);
     expect(allEqual(colorGroupArray)).toBe(false); // The probability of the same color group 5 times in a row is (1/8)^5, or .003051757% - so the allEqual result should equal false.
@@ -78,29 +54,14 @@ describe('Clicking a Color_group_list_item', () => {
       color_group_list_item = color_group_list_items[color_group_list_items.length * Math.random() | 0];
       fireEvent.click(color_group_list_item);
     });
-    await act(async () => {
-      /* We want to ensure that the state updates caused by the random_color_button click have finished. 
-      Several internet resources suggest doing this via findByText("Loading"),  
-      findByText("[some new text that would not have previously been visible]"), or confirming if a specific element
-      has been added or removed from the DOM. We unfortunately can't confirm that the UI has finished
-      updating via text changing, because, regarding the intended effect of the random_color_button click, the
-      existing color (e.g. red) might very well match the new randomly selected color. At the time of this writing,
-      there is precisely a 1/8 chance of this happening (at the time of this writing there are 8 different color groups).
-  
-      Via the setTimeout 2000ms value, we're configuring things such that the UI has 2000ms or 2 seconds to update.
-      */
-      await new Promise((r) => setTimeout(r, 2000));
-    });
+
+    await allowTheUITimeToUpdate();
 
     let hex_code_string = configureHexCodeString();
     let color = await retrieveColorUsingHexCodeString(hex_code_string);
     color_group_associated_with_currently_displayed_color_squares = color.group;
 
-    // await act(async () => {
-    //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-    //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-    //   color_group_associated_with_currently_displayed_color_squares = result.colors[0].group;
-    // });
+  
     expect(ciEquals(color_group_associated_with_currently_displayed_color_squares, color_group_list_item.textContent)).toBe(true);
   });
 });
@@ -113,11 +74,6 @@ describe('Clicking a ColorGridSwatch element when the ColorGrid component\'s Flo
   
   let hex_code_string = configureHexCodeString(true);
   let color = await retrieveColorUsingHexCodeString(hex_code_string);
-    // await act(async () => { // TODO potentially extract to a function - repeat code.
-    //   const res = await fetch('http://localhost:8080/api/colors?hex_code=' + hex_code_string);
-    //   const result = await res.json(); // {"totalItems":1,"colors":[{"id":"6172913e-76dd-4e2a-8885-149716b0f025","html_name":"INDIANRED","hex_code":"CD5C5C","group":"red","rgb_string":"205,92,92","createdAt":"2022-06-14T14:36:57.353Z","updatedAt":"2022-06-14T14:36:57.353Z"}],"totalPages":1,"currentPage":0}
-    //   color_square_color_id = result.colors[0].id;
-    // });
     
   let detail_view_path = `/colors/${color.id}`;
     expect(global.window.location.pathname).toEqual(`${detail_view_path}`);
@@ -160,4 +116,22 @@ async function retrieveColorUsingHexCodeString(hex_code_string) {
     }
   });
   return color;
+}
+
+async function allowTheUITimeToUpdate() {
+  await act(async () => {
+    /* We want to ensure that state updates caused by a random_color_button or color_group_list_item click have finished.
+    
+    Several internet resources suggest doing this via findByText("Loading"),  
+    findByText("[some new text that would not have previously been visible]"), or confirming if a specific element
+    has been added or removed from the DOM. We unfortunately can't confirm that the UI has finished
+    updating via text changing, because, regarding for example the intended effect of the random_color_button click, the
+    existing color (e.g. red) might very well match the new randomly selected color (that being said, please note that 
+    at the time of this writing there is just a 1/8 chance of this happening - at the time of this writing there 
+    are 8 different color groups).
+   
+    Via the setTimeout 2000ms value, we're configuring things such that the UI has 2000ms or 2 seconds to update.
+    */
+    await new Promise((r) => setTimeout(r, 2000));
+  });
 }
