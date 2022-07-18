@@ -8,7 +8,7 @@ import { useState} from "react";
 import { Routes, Route } from "react-router-dom";
 import useSWR from "swr";
 import {laggy} from "./utils.js";
-import TestId from './TestId.js';
+import TestId from './TestId';
 import { useNavigate } from "react-router-dom";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
