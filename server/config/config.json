@@ -5,6 +5,7 @@
     "database": "helpful_human_interview_challenge_database_development",
     "host": "127.0.0.1",
     "dialect": "postgres",
+    "port": 5432,
     "pool": {
         "max": 5,
         "min": 0,
@@ -18,6 +19,7 @@
     "database": "helpful_human_interview_challenge_database_development",
     "host": "127.0.0.1",
     "dialect": "postgres",
+    "port": 5432,
     "pool": {
       "max": 5,
       "min": 0,
@@ -37,6 +39,7 @@
     "password": null,
     "database": "helpful_human_interview_challenge_database",
     "host": "127.0.0.1",
+    "port": 5432,
     "dialect": "postgres"
   }
 }
