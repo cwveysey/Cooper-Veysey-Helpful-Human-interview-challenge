@@ -1,3 +1,4 @@
+// Configured in accordance with https://2ality.com/2020/01/enum-pattern.html, "A class-based enum pattern for JavaScript"
 
 export default class Flow {
   static list_view = new Flow("list_view")
@@ -7,5 +8,8 @@ export default class Flow {
 
     constructor(view_type) {
         this.view_type = view_type  
+  }
+  toString() {
+    return `Flow.${this.view_type}`;
   }
 }
