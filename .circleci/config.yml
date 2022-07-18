@@ -1,0 +1,45 @@
+version: 2.1
+orbs:
+  heroku: circleci/heroku@1.2.6
+  node: circleci/node@5.0.2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.16.3
+      - image: postgres:9.6.2-alpine
+    environment:
+      POSTGRES_USER: cooperveysey
+      POSTGRES_DB: helpful_human_interview_challenge_database
+    working_directory: ~/Cooper-Veysey-Helpful-Human-interview-challenge
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-client-dependencies-{{ checksum "client/package-lock.json" }}
+      # install dependencies
+      - run:
+          name: Install Dependencies
+          command: cd client && npm install
+      - save_cache:
+          paths:
+            - ./client/node_modules/
+          key: npm-client-dependencies-{{ checksum "client/package-lock.json" }} 
+      - run:
+          name: Run jest tests
+          command: cd client && npm install && npm run test
+      - run:
+          name: Install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+           DOCKERIZE_VERSION: v0.3.0
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git:
+          force: false
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
