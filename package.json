@@ -6,7 +6,7 @@
   "scripts": {
     "client": "cd client && npm start",
     "server": "node --trace-warnings --trace-deprecation server.js",
-    "devserver": "nodemon server.js",
+    "devserver": "node --trace-warnings --trace-deprecation server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run devserver\" \"npm run client\"",
     "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
     "build": "npm run build --prefix client",
