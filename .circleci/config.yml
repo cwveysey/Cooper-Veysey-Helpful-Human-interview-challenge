@@ -6,7 +6,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16.3
-      - image: postgres:9.6.2-alpine
+      - image: postgres:11.2-alpine
     environment:
       POSTGRES_USER: cooperveysey
       POSTGRES_DB: helpful_human_interview_challenge_database_development
