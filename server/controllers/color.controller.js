@@ -79,6 +79,7 @@ exports.findAll = (req, res) => {
             res.send(response);
         })
         .catch(err => {
+            console.log(`err is: ${stringify(err)}`);
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving colors."
