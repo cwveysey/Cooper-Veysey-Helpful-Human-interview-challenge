@@ -18,6 +18,10 @@ jobs:
             - npm-client-dependencies-{{ checksum "client/package-lock.json" }}
       # install dependencies
       - run:
+          name: Start the server
+          command: npm start
+          wait-on: 'http://localhost:8080'
+      - run:
           name: Install Dependencies
           command: cd client && npm install
       - save_cache:
