@@ -20,7 +20,6 @@ jobs:
       - run:
           name: Start the development server
           command: npm install && npm run devserver
-          wait-on: 'http://localhost:8080'
       - run:
           name: Install Dependencies
           command: cd client && npm install
