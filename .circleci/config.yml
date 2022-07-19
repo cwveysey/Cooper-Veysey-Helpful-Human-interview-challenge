@@ -20,6 +20,7 @@ jobs:
       - run:
           name: Start the development server
           command: npm install && npm run devserver
+          background: true
       - run:
           name: Install Dependencies
           command: cd client && npm install
