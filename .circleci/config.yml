@@ -5,12 +5,15 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/node:10.16.3
-      - image: postgres:9.6.2-alpine
+      - image: cimg/node:18.8.0
+      - image: postgres:11.2-alpine
     environment:
-      POSTGRES_USER: cooperveysey
-      POSTGRES_DB: helpful_human_interview_challenge_database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: helpful_human_interview_challenge_database_development
+      NODE_ENV: test
     working_directory: ~/Cooper-Veysey-Helpful-Human-interview-challenge
+    resource_class: large
     steps:
       - checkout
       - restore_cache:
@@ -18,20 +21,27 @@ jobs:
             - npm-client-dependencies-{{ checksum "client/package-lock.json" }}
       # install dependencies
       - run:
-          name: Install Dependencies
-          command: cd client && npm install
+          name: Install dependencies
+          command: npm install && cd client && npm install --legacy-peer-deps
       - save_cache:
           paths:
             - ./client/node_modules/
           key: npm-client-dependencies-{{ checksum "client/package-lock.json" }} 
       - run:
-          name: Run jest tests
-          command: cd client && npm install && npm run test
-      - run:
           name: Install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
           environment:
            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Migrate and seed database
+          command: cd server && NODE_ENV=test npx sequelize-cli db:migrate && NODE_ENV=test npx sequelize-cli db:seed:all
+      - run:
+          name: Run tests
+          no_output_timeout: 5m
+          command: cd ~/Cooper-Veysey-Helpful-Human-interview-challenge && pwd && npm run ci
 workflows:
   heroku_deploy:
     jobs:

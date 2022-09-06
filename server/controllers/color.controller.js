@@ -66,19 +66,20 @@ exports.findAll = (req, res) => {
     const { page, size, group, id, hex_code } = req.query;
     let where = [];
     id ? where.push({ id: { [Op.eq]: `${id}` } }) : null;
-    group ? where.push({group: { [Op.iLike]: `%${group}%` }}) : null;
+    group ? where.push({ group: { [Op.iLike]: `%${group}%` } }) : null;
     hex_code ? where.push({ hex_code: { [Op.iLike]: `%${hex_code}%` } }) : null;
     const { limit, offset } = getPagination(page, size);
     Color.findAndCountAll({
         where,
         limit,
         offset
-    }) 
+    })
         .then(data => {
             const response = getPagingData(data, page, limit);
             res.send(response);
         })
         .catch(err => {
+            console.log(`err is: ${stringify(err)}`);
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving colors."

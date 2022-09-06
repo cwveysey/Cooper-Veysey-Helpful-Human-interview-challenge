@@ -1,19 +1,6 @@
 {
   "development": {
-    "username": "cooperveysey",
-    "password": null,
-    "database": "helpful_human_interview_challenge_database_development",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "pool": {
-        "max": 5,
-        "min": 0,
-        "acquire": 30000,
-        "idle": 10000
-    }
-  },
-  "test": {
-    "username": "cooperveysey",
+    "username": "postgres",
     "password": null,
     "database": "helpful_human_interview_challenge_database_development",
     "host": "127.0.0.1",
@@ -25,18 +12,34 @@
       "idle": 10000
     }
   },
+  "test": {
+    "username": "postgres",
+    "password": null,
+    "database": "postgres",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5432,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
+  },
   "production": {
+    "username": "postgres",
+    "password": null,
+    "database": "helpful_human_interview_challenge_database",
+    "host": "127.0.0.1",
+    "port": 5432,
     "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
         "require": true,
         "rejectUnauthorized": false
-      }
-    },
-    "username": "cooperveysey",
-    "password": null,
-    "database": "helpful_human_interview_challenge_database",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+      },
+      "native": true
+    }
   }
 }
