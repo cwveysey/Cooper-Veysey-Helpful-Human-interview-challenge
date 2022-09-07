@@ -1,4 +1,10 @@
-// Configured in accordance with https://2ality.com/2020/01/enum-pattern.html, "A class-based enum pattern for JavaScript"
+/* Configured in accordance with 
+
+1) https://2ality.com/2020/01/enum-pattern.html, "A class-based enum pattern for JavaScript."
+
+2) A Cypress "best practice" outlined via https://docs.cypress.io/guides/references/best-practices#Selecting-Elements,
+ "use data-* attributes to provide context to your selectors and isolate them from CSS or JS changes" */ 
+
 export default class TestId {
     
     static ColorDetailViewTestId = new TestId('ColorDetailViewTestId')
