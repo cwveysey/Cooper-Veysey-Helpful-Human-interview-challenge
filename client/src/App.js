@@ -26,18 +26,17 @@ function App() {
   let navigate = useNavigate();
 
   const handlePageSelection = (pageSelected) => {
-    setDatabasePageNumber(((pageSelected - 1)));
+    setDatabasePageNumber(((pageSelected - 1))); // Because Pagination component page numbers are 1-indexed, and database page numbers are 0-indexed, we subtract 1 from the pageSelected value to calculate the desired databasePageNumber.
   };
 
   const handleColorGroupClick = (colorGroup) => {
     setActiveColorGroupQueryParameter(colorGroup);
-    setDatabasePageNumber(0);
+    setDatabasePageNumber(0); // If a user clicks a Color_group_list_item or the Random_color_button, the databasePageNumber should be set to 0, because we want the first page of relevant data to be retrieved / displayed.
     navigate(`/`);
   };
 
   // If a ColorGridSwatch is clicked while the "/" path is the current path, then the corresponding color id will be passed as an argument to the React Router 'useNavigate' hook. This will navigate the user to the path associated with the aforementioned color id (which will render a ColorDetailView component as part of that process).
   const handleColorGridSwatchClick = (color) => {
-    setDatabasePageNumber(0);
     navigate(`/colors/${color.id}`);
   };
 
