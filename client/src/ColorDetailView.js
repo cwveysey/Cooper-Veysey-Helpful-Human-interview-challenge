@@ -2,7 +2,7 @@ import React from 'react';
 import ColorGrid from './ColorGrid';
 import ColorGridSwatch from './ColorGridSwatch';
 import { calculateShades, calculateTints} from './tint-and-shade-generator.js';
-import Flow from './Flow.js';
+import ViewConfiguration from './ViewConfiguration.js';
 import './App.css';
 import './ColorDetailView.css';
 import useSWR from "swr";
@@ -45,15 +45,15 @@ export default function ColorDetailView(props) {
 
     return (
         <div className='ColorDetailView-container'>
-            {color && <ColorGridSwatch color={color} key={color.id} flow={Flow.detail_view} data-testid={TestId.ColorGridSwatchTestId}></ColorGridSwatch>}
+            {color && <ColorGridSwatch color={color} key={color.id} viewConfiguration={ViewConfiguration.detail_view} data-testid={TestId.ColorGridSwatchTestId}></ColorGridSwatch>}
         <div className='Shades-container'>
             {shades &&
-                <ColorGrid colors={shades} flow={Flow.shades_grid_view} data-testid={TestId.ColorGridTestId}></ColorGrid>
+                    <ColorGrid colors={shades} viewConfiguration={ViewConfiguration.shades_grid_view} data-testid={TestId.ColorGridTestId}></ColorGrid>
             }
         </div>
         <div className='Tints-container'>
             {tints &&
-                <ColorGrid colors={tints} flow={Flow.tints_grid_view} data-testid={TestId.ColorGridTestId}></ColorGrid>
+                    <ColorGrid colors={tints} viewConfiguration={ViewConfiguration.tints_grid_view} data-testid={TestId.ColorGridTestId}></ColorGrid>
             }
             </div>
             <div className='Clear-button-container'>

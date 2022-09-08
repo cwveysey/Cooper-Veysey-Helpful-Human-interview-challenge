@@ -66,7 +66,7 @@ describe('Clicking a Color_group_list_item', () => {
   });
 });
 
-describe('Clicking a ColorGridSwatch element when the ColorGrid component\'s Flow view_type is list_view', () => {
+describe('Clicking a ColorGridSwatch element when the ColorGrid component\'s ViewConfiguration type is list_view', () => {
 
   jest.setTimeout(30000); // Per https://jestjs.io/docs/28.0/jest-object, "The default timeout interval is 5 seconds if this method is not called."
 

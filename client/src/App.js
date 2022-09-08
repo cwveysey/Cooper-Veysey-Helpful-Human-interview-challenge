@@ -2,7 +2,7 @@ import './App.css';
 import NavigationBar from './NavigationBar';
 import Sidebar from './Sidebar';
 import Home from './Home';
-import Flow from './Flow.js';
+import ViewConfiguration from './ViewConfiguration.js';
 import ColorDetailView from './ColorDetailView';
 import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -72,7 +72,7 @@ function App() {
         <div>{`Error fetching colors data - ${error}`}</div>
       )}
       <Routes>
-        {colors && <Route path="/" element={(colors !== undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / maximumNumberOfHomePageColorGridSwatchesThatShouldBeDisplayed)} page={paginationComponentPageNumber} onPageSelection={handlePageSelection} flow={Flow.list_view} data-testid={TestId.HomeTestId} /> : null} />}
+        {colors && <Route path="/" element={(colors !== undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / maximumNumberOfHomePageColorGridSwatchesThatShouldBeDisplayed)} page={paginationComponentPageNumber} onPageSelection={handlePageSelection} viewConfiguration={ViewConfiguration.list_view} data-testid={TestId.HomeTestId} /> : null} />}
         {<Route path="/colors/:id" element={<ColorDetailView data-testid={TestId.ColorDetailViewTestId} />} />}
       </Routes>
     </div>
