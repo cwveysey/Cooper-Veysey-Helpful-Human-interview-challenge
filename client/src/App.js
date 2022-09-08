@@ -55,6 +55,8 @@ function App() {
   })
 
   let maximumNumberOfHomePageColorGridSwatchesThatShouldBeDisplayed = 12; // Regarding the below Math.ceil(colors.totalItems / maximumNumberOfHomePageColorGridSwatchesThatShouldBeDisplayed) function, because the design file (as of July 2022) features 12 colors per page, we divide the total number of colors that we are retrieving - this amount varies depending on whether or not e.g. the query is filtered by color group - by 12 to deterimine how the PaginationList component should render. Because page values are integers, we round up to the nearest integer.
+  let paginationComponentPageNumber = databasePageNumber + 1; // Because Pagination component page numbers are 1-indexed, we add 1 to the databasePageNumber value.
+
   return (
     <div className="App">
       <header>
@@ -65,12 +67,12 @@ function App() {
       <div className='Sidebar'>
         <Sidebar onColorGroupClick={handleColorGroupClick} data-testid={TestId.SidebarTestId}></Sidebar>
       </div>
-      {isValidating && colors === undefined && <div>A moment please...</div>}
+      {isValidating && colors === undefined && <div>A moment please...</div>} {/* Per https://github.com/vercel/swr/discussions/563, isValidating === true if data is being fetched for the first time or data is being updated. Display loading indicator accordingly. */}
       {error && (
         <div>{`Error fetching colors data - ${error}`}</div>
       )}
       <Routes>
-        {colors && <Route path="/" element={(colors !== undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / maximumNumberOfHomePageColorGridSwatchesThatShouldBeDisplayed)} page={databasePageNumber + 1} onPageSelection={handlePageSelection} flow={Flow.list_view} data-testid={TestId.HomeTestId} /> : null} />}
+        {colors && <Route path="/" element={(colors !== undefined) ? <Home colors={colors} onColorGridSwatchClick={handleColorGridSwatchClick} count={Math.ceil(colors.totalItems / maximumNumberOfHomePageColorGridSwatchesThatShouldBeDisplayed)} page={paginationComponentPageNumber} onPageSelection={handlePageSelection} flow={Flow.list_view} data-testid={TestId.HomeTestId} /> : null} />}
         {<Route path="/colors/:id" element={<ColorDetailView data-testid={TestId.ColorDetailViewTestId} />} />}
       </Routes>
     </div>
