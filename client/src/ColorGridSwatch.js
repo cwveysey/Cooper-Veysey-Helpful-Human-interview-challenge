@@ -49,7 +49,7 @@ export default function ColorGridSwatch(props) {
     }
 
     return (
-        <div className={color_grid_swatch_container_class_name_string} onClick={() => handleClick()} data-testid={colorGridSwatch_container_data_test_id_string}>
+        <div className={color_grid_swatch_container_class_name_string} onClick={color_grid_swatch_container_class_name_string == "ColorGridSwatch-container ColorGridSwatch-container-list-view" ? () => handleClick() : undefined } data-testid={colorGridSwatch_container_data_test_id_string}>
             <div className={color_square_class_name_string} style={{ backgroundColor: formatted_hex_code_string }} data-testid={color_square_data_test_id_string} color={JSON.stringify(props.color)}></div>
             <div className={hex_code_container_class_name_string}>
                 {formatted_hex_code_string}
