@@ -15,7 +15,7 @@ export default function Home(props) {
     return (
         <div className='ColorGrid-container'>
             {props.colors !== undefined &&
-                <ColorGrid colors={props.colors} onColorGridSwatchClick={handleColorGridSwatchClick} flow={props.flow} data-testid={TestId.ColorGridTestId}></ColorGrid>
+                <ColorGrid colors={props.colors} onColorGridSwatchClick={handleColorGridSwatchClick} viewConfiguration={props.viewConfiguration} data-testid={TestId.ColorGridTestId}></ColorGrid>
             }
             <div className='PaginationList-container'>
                 {props.colors !== undefined && <PaginationList count={props.count} page={props.page} onPageSelection={handlePageSelection} data-testid={TestId.PaginationListTestId}>

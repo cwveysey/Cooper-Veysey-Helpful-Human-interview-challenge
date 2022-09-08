@@ -1,11 +1,11 @@
 import * as React from 'react';
 import './ColorGridSwatch.css';
-import Flow from './Flow.js';
+import ViewConfiguration from './ViewConfiguration.js';
 import TestId from './TestId.js';
 
 export default function ColorGridSwatch(props) {
     let hex_code_string;
-    if (props.flow.view_type == Flow.tints_grid_view.view_type || props.flow.view_type == Flow.shades_grid_view.view_type) {
+    if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type || props.viewConfiguration.type == ViewConfiguration.shades_grid_view.type) {
     hex_code_string = props.color; 
     } else {
     hex_code_string = props.color.hex_code;
@@ -17,7 +17,7 @@ export default function ColorGridSwatch(props) {
     };
     
     
-    // Assign className and data-testid values based on Flow value.
+    // Assign className and data-testid values based on ViewConfiguration value.
     let color_grid_swatch_container_class_name_string;
     let color_square_class_name_string;
     let hex_code_container_class_name_string;
@@ -26,24 +26,24 @@ export default function ColorGridSwatch(props) {
 
     // Because the color_grid_swatch_container_list_view_string value will be referenced multiple times across this file, assign the value to a reusable variable.
     let color_grid_swatch_container_list_view_string = "ColorGridSwatch-container ColorGridSwatch-container-list-view";
-    
-    switch (props.flow.view_type) {
-        case Flow.list_view.view_type:
+
+    switch (props.viewConfiguration.type) {
+        case ViewConfiguration.list_view.type:
             color_grid_swatch_container_class_name_string = color_grid_swatch_container_list_view_string;
             color_square_class_name_string = "color-square color-square-list-view";
             hex_code_container_class_name_string = "hex-code-container hex-code-container-list-view";
             color_square_data_test_id_string = TestId.Color_square_list_view_TestId;
             colorGridSwatch_container_data_test_id_string = TestId.List_view_ColorGridSwatch_container_TestId;
             break;
-        case Flow.detail_view.view_type:
+        case ViewConfiguration.detail_view.type:
             color_grid_swatch_container_class_name_string = "ColorGridSwatch-container ColorGridSwatch-container-detail-view"
             color_square_class_name_string = "color-square color-square-detail-view"
             hex_code_container_class_name_string = "hex-code-container hex-code-container-detail-view";
             color_square_data_test_id_string = TestId.Color_square_detail_view_TestId;
             colorGridSwatch_container_data_test_id_string = TestId.Detail_view_ColorGridSwatch_container_TestId;
             break;
-        case Flow.tints_grid_view.view_type:
-        case Flow.shades_grid_view.view_type:
+        case ViewConfiguration.tints_grid_view.type:
+        case ViewConfiguration.shades_grid_view.type:
             color_grid_swatch_container_class_name_string = "ColorGridSwatch-container ColorGridSwatch-container-tints_and_shades_grid_view"
             color_square_class_name_string = "color-square color-square-tints_and_shades_grid_view"
             hex_code_container_class_name_string = "hex-code-container hex-code-container-tints_and_shades_grid_view";
