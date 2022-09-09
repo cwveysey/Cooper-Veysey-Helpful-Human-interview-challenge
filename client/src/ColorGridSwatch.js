@@ -4,18 +4,21 @@ import ViewConfiguration from './ViewConfiguration.js';
 import TestId from './TestId.js';
 
 export default function ColorGridSwatch(props) {
+    // TODO for organizational purposes, extract configure hexcode string code to a function.
     let hex_code_string;
+    console.log(`ColorGridSwatch props is ${JSON.stringify(props)}`);
+    console.log(`props.viewConfiguration.type is ${props.viewConfiguration.type}`);
     if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type || props.viewConfiguration.type == ViewConfiguration.shades_grid_view.type) {
-    hex_code_string = props.color; 
-    } else {
-    hex_code_string = props.color.hex_code;
+        hex_code_string = props.hex_code_string; 
+    } else if (props.viewConfiguration.type == ViewConfiguration.detail_view.type || props.viewConfiguration.type == ViewConfiguration.list_view.type) {
+        hex_code_string = props.color.hex_code;
     }
-    let formatted_hex_code_string = ('#' + hex_code_string).toLowerCase();
     
+    let formatted_hex_code_string = ('#' + hex_code_string).toLowerCase();
+     
     const handleClick = () => {
         props.onColorGridSwatchClick(props.color);
     };
-    
     
     // Assign className and data-testid values based on ViewConfiguration value.
     let color_grid_swatch_container_class_name_string;

@@ -89,7 +89,15 @@ exports.findAll = (req, res) => {
 
 // Find a single Color with an id
 exports.findByPk = (req, res) => {
-    const id = req.params.id;
+    /* Per https://expressjs.com/en/guide/routing.html,
+    
+    "Route parameters are named URL segments that are used to capture the values specified at their position in the URL. 
+    The captured values are populated in the req.params object, with the name of the route parameter specified in 
+    the path as their respective keys.""
+
+    Because we have a /colors/:id route, for /colors/:id URLs (an example URL: http://localhost:3000/colors/276934c3-962f-4aad-b18e-ba7f25f2cf92),
+    we have access to their id value via req.params.id" */
+    const id = req.params.id; 
     Color.findByPk(id)
         .then(data => {
             if (data) {
