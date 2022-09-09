@@ -5,8 +5,6 @@ import ViewConfiguration from './ViewConfiguration.js';
 import TestId from './TestId.js';
 
 export default function ColorGrid(props) {
-    console.log(`ColorGrid props is ${JSON.stringify(props)}`);
-    console.log(`ColorGrid props.viewConfiguration.type is ${JSON.stringify(props.viewConfiguration.type)}`);
     if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type || props.viewConfiguration.type == ViewConfiguration.shades_grid_view.type) {
         let hex_code_strings;
         if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type) {

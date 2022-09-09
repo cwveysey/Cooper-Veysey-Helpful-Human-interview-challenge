@@ -4,17 +4,8 @@ import ViewConfiguration from './ViewConfiguration.js';
 import TestId from './TestId.js';
 
 export default function ColorGridSwatch(props) {
-    // TODO for organizational purposes, extract configure hexcode string code to a function.
-    let hex_code_string;
-    console.log(`ColorGridSwatch props is ${JSON.stringify(props)}`);
-    console.log(`props.viewConfiguration.type is ${props.viewConfiguration.type}`);
-    if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type || props.viewConfiguration.type == ViewConfiguration.shades_grid_view.type) {
-        hex_code_string = props.hex_code_string; 
-    } else if (props.viewConfiguration.type == ViewConfiguration.detail_view.type || props.viewConfiguration.type == ViewConfiguration.list_view.type) {
-        hex_code_string = props.color.hex_code;
-    }
     
-    let formatted_hex_code_string = ('#' + hex_code_string).toLowerCase();
+    let formatted_hex_code_string = configureHexCodeStringUsingProps(props);
      
     const handleClick = () => {
         props.onColorGridSwatchClick(props.color);
@@ -27,7 +18,8 @@ export default function ColorGridSwatch(props) {
     let color_square_data_test_id_string;
     let colorGridSwatch_container_data_test_id_string;
 
-    // Because the color_grid_swatch_container_list_view_string value will be referenced multiple times across this file, assign the value to a reusable variable.
+    /* Because the color_grid_swatch_container_list_view_string value will be referenced multiple times across this file, 
+    assign the value to a reusable variable. */
     let color_grid_swatch_container_list_view_string = "ColorGridSwatch-container ColorGridSwatch-container-list-view";
 
     switch (props.viewConfiguration.type) {
@@ -63,4 +55,19 @@ export default function ColorGridSwatch(props) {
             </div>
         </div>
     );
+    }
+
+function configureHexCodeStringUsingProps(props) {
+    let hex_code_string;
+    
+    if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type || props.viewConfiguration.type == ViewConfiguration.shades_grid_view.type) {
+        hex_code_string = props.hex_code_string;
+    } else if (props.viewConfiguration.type == ViewConfiguration.detail_view.type || props.viewConfiguration.type == ViewConfiguration.list_view.type) {
+        hex_code_string = props.color.hex_code;
+    }
+    /* Account for the fact that, as far as hexadecimal color strings (https://developer.mozilla.org/en-US/docs/Web/CSS/hex-color),
+    our database stores exclusively hexadecimal characters (0–9, A–F). The design specifications for this project depict 
+    hex strings with a leading "#" sign (which is commonplace, per https://en.wikipedia.org/wiki/Web_colors) */ 
+    let formatted_hex_code_string = ('#' + hex_code_string).toLowerCase();
+    return formatted_hex_code_string;
     }

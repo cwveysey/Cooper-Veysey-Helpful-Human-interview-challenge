@@ -12,7 +12,8 @@ import 'antd/dist/antd.min.css'; // See https://github.com/ant-design/ant-design
 import { useParams } from 'react-router-dom';
 import TestId from './TestId.js'; // An enum that makes the codebase more DRY, via making the app's data-testid selectors reusable.
 
-// The fetcher function accepts a url and serves as (essentially) a Fetch API wrapper. The below line of code was borrowed directly from the SWR documentation (https://swr.vercel.app/docs/data-fetching). 
+/* The fetcher function accepts a url and serves as (essentially) a Fetch API wrapper. The below line of code was borrowed 
+directly from the SWR documentation (https://swr.vercel.app/docs/data-fetching). */
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function ColorDetailView() {
@@ -26,7 +27,7 @@ export default function ColorDetailView() {
     const { data: color, error, isValidating} = useSWR(() => {
         return (process.env.REACT_APP_APIUrl + `/colors/${params.id}`)
     }, fetcher, { use: [laggy] });
-    console.log(`ColorDetailView color is ${JSON.stringify(color)}`);
+    
     let shades;
     let tints;
     
