@@ -1,16 +1,16 @@
 import React from 'react';
 import ColorGrid from './ColorGrid';
 import ColorGridSwatch from './ColorGridSwatch';
-import { calculateShades, calculateTints} from './tint-and-shade-generator.js';
-import ViewConfiguration from './ViewConfiguration.js';
+import { calculateShades, calculateTints } from '../utils/tint-and-shade-generator.js';
+import ViewConfiguration from '../enums/ViewConfiguration.js';
 import './App.css';
 import './ColorDetailView.css';
 import useSWR from "swr";
-import { laggy } from "./utils.js";
+import { laggy } from "../utils/utils.js";
 import { notification } from 'antd';
 import 'antd/dist/antd.min.css'; // See https://github.com/ant-design/ant-design/issues/33327
 import { useParams } from 'react-router-dom';
-import TestId from './TestId.js'; // An enum that makes the codebase more DRY, via making the app's data-testid selectors reusable.
+import TestId from '../enums/TestId.js'; // An enum that makes the codebase more DRY, via making the app's data-testid selectors reusable.
 
 /* The fetcher function accepts a url and serves as (essentially) a Fetch API wrapper. The below line of code was borrowed 
 directly from the SWR documentation (https://swr.vercel.app/docs/data-fetching). */

@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, waitFor} from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import App from './App';
-import { rgbToHex } from './tint-and-shade-generator.js';
-import TestId from './TestId.js';
+import { rgbToHex } from '../utils/tint-and-shade-generator.js';
+import TestId from '../enums/TestId.js';
 import { BrowserRouter } from 'react-router-dom';
 const { stringify } = require('flatted');
 

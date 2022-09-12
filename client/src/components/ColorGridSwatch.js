@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './ColorGridSwatch.css';
-import ViewConfiguration from './ViewConfiguration.js';
-import TestId from './TestId.js';
+import ViewConfiguration from '../enums/ViewConfiguration.js';
+import TestId from '../enums/TestId.js';
 
 export default function ColorGridSwatch(props) {
     

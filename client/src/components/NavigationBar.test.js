@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import NavigationBar from './NavigationBar';
-import TestId from './TestId.js';
+import TestId from '../enums/TestId.js';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from "react-router-dom";
 import App from './App';

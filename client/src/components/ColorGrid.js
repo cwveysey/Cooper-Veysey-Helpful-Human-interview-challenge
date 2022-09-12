@@ -1,8 +1,8 @@
 import * as React from 'react';
 import './ColorGrid.css';
 import ColorGridSwatch from './ColorGridSwatch';
-import ViewConfiguration from './ViewConfiguration.js';
-import TestId from './TestId.js';
+import ViewConfiguration from '../enums/ViewConfiguration.js';
+import TestId from '../enums/TestId.js';
 
 export default function ColorGrid(props) {
     if (props.viewConfiguration.type == ViewConfiguration.tints_grid_view.type || props.viewConfiguration.type == ViewConfiguration.shades_grid_view.type) {

@@ -1,8 +1,8 @@
 import * as React from 'react'; 
 import './NavigationBar.css';
 import { useNavigate } from "react-router-dom";
-import Helpful_Human_logo from './assets/Helpful_Human_logo.svg';
-import TestId from './TestId.js';
+import Helpful_Human_logo from '../assets/Helpful_Human_logo.svg';
+import TestId from '../enums/TestId.js';
 
 function NavigationBar(props) {
     let navigate = useNavigate();

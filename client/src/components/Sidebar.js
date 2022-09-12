@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Sidebar.css';
-import TestId from './TestId.js';
+import TestId from '../enums/TestId.js';
 
 const colorGroups = [
     {"name": "Red" }, 
