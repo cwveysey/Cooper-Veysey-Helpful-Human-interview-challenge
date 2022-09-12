@@ -5,7 +5,8 @@ const { stringify } = require('flatted');
 
 // Configured per https://www.bezkoder.com/node-js-sequelize-pagination-mysql/
 const getPagination = (page, size) => {
-    const limit = size ? +size : 12;
+    let numberOfItemsPerPage = 12;
+    const limit = size ? +size : numberOfItemsPerPage;
     const offset = page ? page * limit : 0;
 
     return { limit, offset };

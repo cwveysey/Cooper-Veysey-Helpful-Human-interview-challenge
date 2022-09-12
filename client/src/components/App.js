@@ -2,13 +2,13 @@ import './App.css';
 import NavigationBar from './NavigationBar';
 import Sidebar from './Sidebar';
 import Home from './Home';
-import ViewConfiguration from './ViewConfiguration.js';
+import ViewConfiguration from '../enums/ViewConfiguration.js';
 import ColorDetailView from './ColorDetailView';
 import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import useSWR from "swr"; // A React Hooks library for data fetching.
-import { laggy } from "./utils.js"; // SWR middleware. Configured per https://swr.vercel.app/docs/middleware#keep-previous-result.
-import TestId from './TestId'; // An enum that makes the codebase more DRY, via making the app's data-testid selectors reusable.
+import { laggy } from "../utils/utils.js"; // SWR middleware. Configured per https://swr.vercel.app/docs/middleware#keep-previous-result.
+import TestId from '../enums/TestId.js'; // An enum that makes the codebase more DRY, via making the app's data-testid selectors reusable.
 
 /* The fetcher function accepts a url and serves as (essentially) a Fetch API wrapper. The below line of code was borrowed
 directly from the SWR documentation (https://swr.vercel.app/docs/data-fetching). */

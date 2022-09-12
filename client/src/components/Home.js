@@ -2,7 +2,7 @@ import React from 'react';
 import ColorGrid from './ColorGrid';
 import PaginationList from './PaginationList';
 import './App.css';
-import TestId from './TestId.js';
+import TestId from '../enums/TestId.js';
 
 export default function Home(props) {
     const handlePageSelection = (pageSelected) => {
